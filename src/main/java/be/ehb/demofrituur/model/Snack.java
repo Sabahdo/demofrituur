@@ -13,16 +13,15 @@ import java.math.BigDecimal;
 
 @Entity
 public class Snack {
-
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
+    @NotBlank
     private String name;
-    @DecimalMin(value = "0.50")
+
+    @NotNull
+    @DecimalMin(value = "0.50",message = "moet groter zijn dan 0.5")
     private BigDecimal price;
 
     public Snack() {

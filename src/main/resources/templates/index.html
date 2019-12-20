@@ -8,15 +8,17 @@
     <meta charset="UTF-8">
     <title>Snackbar</title>
 
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" th:href="@{CSS/main.css}">
 
 </head>
         <body>
+
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Price</th>
+                        <th th:text="#{col_name}"></th>
+                        <th th:text="#{col_price}" ></th>
+                        <th></th>
 
                     </tr>
                 </thead>
@@ -25,25 +27,28 @@
                     <tr th:each="snack : ${alleSnacks}">
                         <td th:text="${snack.name}"></td>
                         <td th:text="${snack.price}"></td>
+                        <td> <a th:href="@{~/delete/{id}(id = ${snack.id})}" th:text="#{delete}"></a></td>
 
                     </tr>
                 </tbody>
             </table>
                     <div>
                         <form th:action="@{~/index}" method="post" th:object="${nieuweSnack}">
-                            <label for="name">Name</label>
+                            <label for="name" th:text="#{col_name}"></label>
                             <input type="text" th:field="*{name}" id="name">
-                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
 
-
-                        <form th:action="@{~/index}" method="post" th:object="${nieuweSnack}">
-                            <label for="price">Price</label>
+                            <label for="price"th:text="#{col_price}"></label>
                             <input type="text" th:field="*{price}" id="price">
-                            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
-                        <input type="submit">
+                            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></span>
+
+                            <input th:value="#{submit}" type="submit">
 
                         </form>
-
                     </div>
+            <div>
+            <img class="fotoke" alt="Snackfoto" th:src="@{~/images/Snackbarwiki.jpg}">
+            </div>
         </body>
+
 </html>
